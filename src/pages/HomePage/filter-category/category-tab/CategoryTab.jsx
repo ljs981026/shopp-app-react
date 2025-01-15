@@ -3,6 +3,7 @@ import styles from './CategoryTab.module.scss';
 import { setActiveCategory } from '../../../../store/categories/categories.slice';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 
+
 const CategoryTab = ({ text, categoryName }) => {
   const dispatch = useAppDispatch();
   const category = useAppSelector((state) => state.categories);
