@@ -12,7 +12,7 @@ const CartPage = () => {
         <CartEmpty title="Cart" />
       ) : (
         <div className='container'>
-          <h1>장바구니</h1>\
+          <h1>장바구니</h1>
           <CartList />
           <Checkout />
         </div>
