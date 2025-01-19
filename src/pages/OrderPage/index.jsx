@@ -1,8 +1,21 @@
 import React from 'react'
+import { useAuth } from '../../hooks/useAuth'
+import { Navigate } from 'react-router-dom';
+import OrdersList from './orders-list/OrdersList';
 
 const OrderPage = () => {
+
+  const { isAuth } = useAuth();
+
+  if (!isAuth ) return <Navigate to="/" />;
+
   return (
-    <div>OrderPage</div>
+    <div className='page'>
+      <div className='container'>
+        <h1>주문 내역</h1>
+        <OrdersList />
+      </div>
+    </div>
   )
 }
 
