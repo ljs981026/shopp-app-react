@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 src/axios.js
+src/firebase.js
 
 # Editor directories and files
 .vscode/*
