@@ -6,6 +6,9 @@ import cartSlice from "./cart/cart.slice";
 import productSlice from "./products/product.slice";
 import orderSlice from "./order/order.slice";
 
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch;
+
 export const store = configureStore({
   reducer: {
     user: userSlice,

@@ -4,7 +4,7 @@ import { GoSignOut } from 'react-icons/go'
 import { Link } from 'react-router-dom'
 import styles from './Nav.module.scss';
 import { useAuth } from '../../../hooks/useAuth';
-import { signOut, getAuth } from 'firebase/auth/cordova';
+import { signOut, getAuth } from 'firebase/auth';
 import app from '../../../firebase';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { removeUser } from '../../../store/user/user.slice';

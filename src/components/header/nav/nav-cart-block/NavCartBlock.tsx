@@ -2,17 +2,17 @@ import React, { useEffect } from 'react'
 import { getTotalPrice } from '../../../../store/cart/cart.slice'
 import styles from './NavCartBlock.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import NavCartList from './nav-cart-list/NavCartList';
+import NavCartList from './nav-cart-list/NavCartList.jsx';
 import { Link } from 'react-router-dom';
 
 const NavCartBlock = () => {
 
-  const { totalPrice, product } = useAppSelector((state) => state.cart);
+  const { totalPrice, products } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getTotalPrice(product));
-  }, [])
+    dispatch(getTotalPrice());
+  }, [products])
 
   return (
     <div className={styles.nav_cart_block}>

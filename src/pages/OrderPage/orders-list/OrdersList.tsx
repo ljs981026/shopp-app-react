@@ -22,9 +22,9 @@ const OrdersList = () => {
   }
 
   return (
-    <div className={styles}>
+    <div className={styles.orders}>
       { orders.map(item => (
-        <div key={item}> 
+        <div key={item.id}> 
           <div className={styles.order_header}>
             <h3>주문 번호_{item.id}</h3>
             <p>합계: $ {item.totalPrice.toFixed(2)}</p>

@@ -1,25 +1,32 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { IProduct } from "./product.types";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (category, thunkAPI) => {
+  async (category: string, thunkAPI) => {
     console.log(thunkAPI);
     try {
-      let response;
+      let response: AxiosResponse<IProduct[], any>;
       if (category) {
-        response = await axios.get(`https://fakestoreapi.com/products/category/${category}`)   
+        response = await axios.get<IProduct[]>(`https://fakestoreapi.com/products/category/${category}`)   
       } else {
-        response = await axios.get("https://fakestoreapi.com/products")   
+        response = await axios.get<IProduct[]>("https://fakestoreapi.com/products")   
       }               
       return response.data;
     } catch (error) {
-      thunkAPI.rejectWithValue("Error loading products");
+      return thunkAPI.rejectWithValue("Error loading products");
     }
   }
 );
 
-const initialState = {
+type ProductType = {
+  products: IProduct[];
+  isLoading: boolean;
+  error: string;
+}
+
+const initialState: ProductType = {
   products: [],
   isLoading: false,
   error: '',
@@ -41,7 +48,7 @@ export const productsSlice = createSlice({
     })
     .addCase(fetchProducts.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.payload;
+      state.error = action.payload as string;
     })
   }
 })

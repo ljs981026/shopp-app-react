@@ -12,7 +12,7 @@ const SignIn = () => {
   const [firebaseError, setFirebaseError] = useState("");
   const dispatch = useDispatch();
   const auth = getAuth(app);
-  const handleLogin = (email, password) => {
+  const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log(userCredential)

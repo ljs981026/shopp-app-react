@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { MockAPI } from "../../axios";
+import { IOrder } from "./order.types";
 
 export const fetchOrder = createAsyncThunk(
   "order/fetchOrder",
-  async (userId, thunkAPI) => {
+  async (userId: string, thunkAPI) => {
     try {      
       const response = await MockAPI.Order.getOrder(userId);            
       return response.data;
@@ -13,8 +14,14 @@ export const fetchOrder = createAsyncThunk(
   }
 )
 
-const initialState = {
-  orders: {},
+type OrderState = {
+  orders: IOrder[];
+  isLoading: boolean;
+  error: string;
+}
+
+const initialState: OrderState = {
+  orders: [] as IOrder[],
   isLoading: false,
   error: ""
 }
@@ -34,7 +41,7 @@ export const orderSlice = createSlice({
       })
       .addCase(fetchOrder.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       })
   }
 })

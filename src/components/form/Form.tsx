@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './Form.module.scss';
-import { useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
-const Form = ({title, getDataForm, firebaseError}) => {
-  const { register, handleSubmit, formState: {errors}, reset } = useForm({
+type FormProps = {
+  title: string;
+  getDataForm: (email: string, password: string) => void;
+  firebaseError: string;
+}
+
+type Inputs = {
+  email: string;
+  password: string;
+}
+
+const Form: FC<FormProps> = ({title, getDataForm, firebaseError}) => {
+  const { register, handleSubmit, formState: {errors}, reset } = useForm<Inputs>({
     mode: 'onChange'
   })
   
-  const onSubmit = ({ email, password }) => {    
+  const onSubmit: SubmitHandler<FieldValues> = ({ email, password }) => {    
     getDataForm(email, password)
     reset();
   }
@@ -15,7 +26,7 @@ const Form = ({title, getDataForm, firebaseError}) => {
   const userEmail = {
     required: "필수 입력값입니다.",
     pattern: {
-      vlaue: /^([A-Z|a-z|0-9(\.|_){0,1})+[A-Z|a-z|0-9\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm,
+      value: /^([A-Z|a-z|0-9(\.|_){0,1})+[A-Z|a-z|0-9\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm,
       message: "입력하신 이메일 주소가 올바르지 않습니다."
     }
   } 
